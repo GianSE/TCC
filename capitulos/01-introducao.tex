@@ -1,0 +1,107 @@
+% -------------------------------------------------------
+% CAPÍTULO 1 — INTRODUÇÃO
+% -------------------------------------------------------
+\chapter{Introdução}
+
+A combinação entre IA Generativa e \textit{Federated Learning} apresenta um caminho promissor para construir sistemas de detecção de anomalias que sejam ao mesmo tempo eficientes e compatíveis com requisitos de segurança e privacidade. O aprendizado federado, paradigma introduzido por \citeonline{mcmahan2017}, permite treinar modelos globalmente sem que os dados brutos deixem os dispositivos clientes, tornando-o ideal para ambientes distribuídos e em larga escala \cite{bonawitz2019}.
+
+Este trabalho explora essa integração com o objetivo de desenvolver, implementar e avaliar uma arquitetura de detecção de anomalias treinada de forma federada utilizando modelos generativos.
+
+A expansão de redes de computadores e a crescente interconexão entre dispositivos têm intensificado a necessidade de mecanismos avançados de segurança. Sistemas de Detecção de Intrusão (IDS) tradicionais baseiam-se em assinaturas ou em modelos centralizados que analisam grandes volumes de dados. Entretanto, tais abordagens enfrentam limitações significativas quando aplicadas a ambientes distribuídos ou a sistemas que precisam preservar a privacidade dos dados.
+
+Em muitos cenários reais, como organizações corporativas com várias filiais, hospitais, sistemas financeiros ou dispositivos IoT, a centralização de dados de tráfego não é viável por razões regulatórias, operacionais ou éticas. Nessas condições, torna-se necessário desenvolver técnicas que permitam treinar modelos de detecção de anomalias sem comprometer a privacidade ou exigir a transferência massiva de dados.
+
+Paralelamente, modelos de Inteligência Artificial Generativa têm demonstrado grande capacidade de aprender distribuições complexas de dados. Em particular, modelos como \textit{Generative Adversarial Networks} (GANs) e \textit{Variational Autoencoders} (VAEs) são eficazes em capturar padrões de comportamento normal, tornando-se valiosos para tarefas de detecção de anomalias baseadas em erro de reconstrução.
+
+A combinação entre IA Generativa e \textit{Federated Learning} apresenta um caminho promissor para construir sistemas de detecção de anomalias que sejam ao mesmo tempo eficientes e compatíveis com requisitos de segurança e privacidade. O aprendizado federado permite treinar modelos globalmente sem que os dados brutos deixem os dispositivos clientes, tornando-o ideal para ambientes distribuídos.
+
+Este trabalho explora essa integração com o objetivo de desenvolver, implementar e avaliar uma arquitetura de detecção de anomalias treinada de forma federada utilizando modelos generativos.
+
+\section{Citações}
+
+A expansão de redes de computadores e a crescente interconexão entre dispositivos têm intensificado a necessidade de mecanismos avançados de segurança. Sistemas de Detecção de Intrusão (IDS) tradicionais baseiam-se em assinaturas ou em modelos centralizados que analisam grandes volumes de dados. Entretanto, tais abordagens enfrentam limitações significativas quando aplicadas a ambientes distribuídos ou a sistemas que precisam preservar a privacidade dos dados \cite{kairouz2021}.
+
+Em muitos cenários reais, como organizações corporativas com várias filiais, hospitais, sistemas financeiros ou dispositivos IoT, a centralização de dados de tráfego não é viável por razões regulatórias, operacionais ou éticas. Nessas condições, torna-se necessário desenvolver técnicas que permitam treinar modelos de detecção de anomalias sem comprometer a privacidade ou exigir a transferência massiva de dados.
+
+Paralelamente, modelos de Inteligência Artificial Generativa têm demonstrado grande capacidade de aprender distribuições complexas de dados. Em particular, modelos como \textit{Generative Adversarial Networks} (GANs) e \textit{Variational Autoencoders} (VAEs) são eficazes em capturar padrões de comportamento normal, conforme destacado por \citeonline{ho2022}, tornando-se valiosos para tarefas de detecção de anomalias baseadas em erro de reconstrução \cite{ruff2018}.
+
+% -------------------------------------------------------
+% 1.1 CONTEXTO
+% -------------------------------------------------------
+\section{Contexto}
+
+O crescimento da quantidade e complexidade do tráfego de rede tem impulsionado o desenvolvimento de métodos automáticos para identificar comportamentos anormais. Os avanços recentes em aprendizado de máquina e aprendizado profundo possibilitam a análise eficiente de grandes volumes de dados de rede.
+
+No entanto, tais métodos tradicionalmente exigem:
+\begin{itemize}
+    \item grandes conjuntos de dados centralizados;
+    \item transferência constante de dados para servidores centrais;
+    \item ausência de restrições de privacidade.
+\end{itemize}
+
+Em contrapartida, ambientes modernos:
+\begin{itemize}
+    \item são distribuídos por natureza;
+    \item lidam com informações sensíveis;
+    \item enfrentam restrições legais (LGPD, GDPR);
+    \item possuem diversos tipos de dispositivos e redes heterogêneas.
+\end{itemize}
+
+Essa discrepância motiva a busca por alternativas distribuídas e seguras.
+
+% -------------------------------------------------------
+% 1.2 PROBLEMA DE PESQUISA
+% -------------------------------------------------------
+\section{Problema de Pesquisa}
+
+Como detectar anomalias em redes distribuídas preservando a privacidade dos dados, reduzindo a necessidade de comunicação e obtendo desempenho competitivo em comparação com métodos centralizados?
+
+% -------------------------------------------------------
+% 1.3 HIPÓTESE
+% -------------------------------------------------------
+\section{Hipótese}
+
+Modelos generativos treinados via \textit{Federated Learning} são capazes de aprender a distribuição normal de tráfego de rede e identificar anomalias com desempenho próximo ou superior aos modelos treinados de forma centralizada.
+
+% -------------------------------------------------------
+% 1.4 OBJETIVOS
+% -------------------------------------------------------
+\section{Objetivos}
+
+\subsection{Objetivo Geral}
+
+Desenvolver e avaliar uma arquitetura de detecção de anomalias utilizando IA Generativa e \textit{Federated Learning}.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+    \item Implementar um ambiente federado com múltiplos nós simulados.
+    \item Construir e treinar um modelo generativo para aprender padrões normais de tráfego.
+    \item Comparar desempenho entre abordagem centralizada e federada.
+    \item Avaliar métricas como precisão, recall, F1-score e erro de reconstrução.
+    \item Analisar limitações, gargalos e vantagens da abordagem proposta.
+\end{itemize}
+
+% -------------------------------------------------------
+% 1.5 JUSTIFICATIVA
+% -------------------------------------------------------
+\section{Justificativa}
+
+A crescente demanda por segurança em redes distribuídas, aliada às restrições de privacidade impostas por legislações como a LGPD, exige soluções inovadoras que permitam a detecção de anomalias sem transferir dados sensíveis. O \textit{Federated Learning} surge como uma abordagem altamente relevante nesse contexto, permitindo o treinamento colaborativo sem violação da privacidade.
+
+modelos generativos, por sua vez, têm se mostrado eficazes para a detecção de anomalias ao aprender o comportamento normal do sistema. Essa combinação representa uma alternativa promissora para cenários reais e desafiadores.
+
+% -------------------------------------------------------
+% 1.6 ESTRUTURA DO TRABALHO
+% -------------------------------------------------------
+\section{Estrutura do Trabalho}
+
+Este trabalho está organizado da seguinte forma:
+
+\begin{itemize}
+    \item \textbf{Capítulo 1} — Introdução, contexto, problema, objetivos e justificativa.
+    \item \textbf{Capítulo 2} — Fundamentação teórica sobre redes, IDS, IA generativa e federated learning.
+    \item \textbf{Capítulo 3} — Metodologia, dataset, modelo proposto e arquitetura federada.
+    \item \textbf{Capítulo 4} — Resultados, testes e análise experimental.
+    \item \textbf{Capítulo 5} — Conclusões e trabalhos futuros.
+\end{itemize}

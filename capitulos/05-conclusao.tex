@@ -1,0 +1,38 @@
+\chapter{Conclusão e Trabalhos Futuros}
+
+Este trabalho apresentou uma abordagem baseada em \textit{Inteligência Artificial Generativa} combinada com \textit{Federated Learning} para detecção de anomalias em tráfego de rede. A arquitetura proposta aproveita a capacidade dos modelos generativos em aprender padrões normais e a eficiência do aprendizado distribuído para treinar modelos colaborativamente sem violar a privacidade dos dados.
+
+\section{Conclusões}
+A partir dos experimentos realizados, conclui-se que:
+
+\begin{itemize}
+    \item o modelo generativo é eficaz na detecção de anomalias por meio de erro de reconstrução;
+    \item o treinamento federado apresentou desempenho próximo ao modelo centralizado;
+    \item a abordagem proposta preserva privacidade e reduz custo de transmissão;
+    \item o sistema é escalável e adaptável a diferentes ambientes de rede;
+    \item a integração entre FL e IA generativa é viável e promissora para uso real.
+\end{itemize}
+
+Assim, o objetivo geral do trabalho foi alcançado, demonstrando que é possível combinar FL e modelos generativos para melhorar a segurança de redes distribuídas.
+
+\section{Limitações do Trabalho}
+Algumas limitações observadas incluem:
+
+\begin{itemize}
+    \item necessidade de recursos computacionais nos clientes para treinamento local;
+    \item variação de desempenho conforme número de clientes e heterogeneidade dos dados;
+    \item maior tempo de treinamento devido à comunicação federada.
+\end{itemize}
+
+\section{Trabalhos Futuros}
+Para continuidade deste estudo, sugerem-se:
+
+\begin{itemize}
+    \item uso de \textbf{GANs federadas} e \textbf{modelos de difusão} para comparação;
+    \item implementação de técnicas de \textbf{diferential privacy} ou \textbf{secure aggregation};
+    \item aplicação em ambientes reais, como redes corporativas e IoT;
+    \item otimização de comunicação entre clientes usando compressão de gradientes;
+    \item integração com orquestradores como \textit{Kubernetes} para escalabilidade real.
+\end{itemize}
+
+Acredita-se que esses avanços podem melhorar ainda mais a eficiência e aplicabilidade da detecção distribuída de anomalias usando IA.

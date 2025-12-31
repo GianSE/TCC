@@ -1,0 +1,147 @@
+\chapter{Metodologia}
+
+Este capítulo descreve a abordagem metodológica adotada para o desenvolvimento deste trabalho, incluindo arquitetura proposta, ferramentas utilizadas, preparação dos dados, definição dos modelos generativos, configuração do ambiente federado e métricas de avaliação. O objetivo é apresentar de forma clara e sistemática os passos necessários para a implementação do sistema de detecção de anomalias baseado em \textit{Federated Learning} e IA generativa.
+
+\section{Visão Geral da Arquitetura}
+A arquitetura proposta integra um modelo generativo distribuído por meio de \textit{Federated Learning}. A Figura~\ref{fig:arquitetura} apresenta uma visão geral do fluxo.
+
+\begin{itemize}
+    \item Cada cliente (nó da rede) treina localmente um modelo generativo com seus dados de tráfego.
+    \item O servidor federado coleta os pesos atualizados.
+    \item O agregador aplica FedAvg para gerar o modelo global.
+    \item O modelo global é redistribuído aos clientes para nova rodada.
+    \item A detecção de anomalias é realizada localmente usando erro de reconstrução.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figuras/arquitetura.png}
+    \caption{Arquitetura geral do sistema federado para detecção de anomalias.}
+    \label{fig:arquitetura}
+\end{figure}
+
+\section{Ferramentas e Tecnologias}
+Para a implementação do sistema foram utilizadas as seguintes ferramentas:
+
+\subsection{Frameworks}
+\begin{itemize}
+    \item \textbf{PyTorch}: para implementação dos modelos generativos.
+    \item \textbf{Flower} ou \textbf{FedML}: para orquestração federada.
+    \item \textbf{Scikit-learn}: pré-processamento e métricas.
+    \item \textbf{Pandas / NumPy}: manipulação dos dados.
+\end{itemize}
+
+\subsection{Ambiente}
+\begin{itemize}
+    \item \textbf{Python 3.11}
+    \item \textbf{Docker}: para simular clientes federados.
+    \item \textbf{VSCode / Jupyter}: desenvolvimento do código.
+\end{itemize}
+
+\section{Descrição dos Dados}
+Para avaliar o sistema, utilizou-se um dos seguintes datasets de tráfego de rede:
+\begin{itemize}
+    \item \textbf{CICIDS2017}
+    \item \textbf{UNSW-NB15}
+    \item \textbf{UGR16}
+\end{itemize}
+
+O dataset é dividido em:
+\begin{itemize}
+    \item dados de tráfego normal (para treinar o modelo generativo);
+    \item dados contendo ataques (para avaliação da detecção).
+\end{itemize}
+
+\subsection{Pré-processamento}
+As etapas incluem:
+\begin{itemize}
+    \item limpeza de valores ausentes;
+    \item normalização Min-Max;
+    \item seleção das principais características numéricas;
+    \item divisão dos dados entre clientes simulados.
+\end{itemize}
+
+\section{Modelo Generativo}
+O modelo generativo adotado foi um \textbf{Autoencoder Variacional (VAE)} devido à sua boa capacidade de reconstrução e estabilidade no treinamento federado.
+
+\subsection{Arquitetura do VAE}
+\begin{itemize}
+    \item camadas densas no encoder e decoder;
+    \item função de ativação ReLU;
+    \item espaço latente de dimensão reduzida ($z$);
+    \item perda composta por:
+    \[
+    \mathcal{L} = \text{MSE}(x, \hat{x}) + D_{KL}
+    \]
+\end{itemize}
+
+Alternativamente, testes podem ser conduzidos com:
+\begin{itemize}
+    \item \textbf{GANs}
+    \item \textbf{Diffusion Models}
+\end{itemize}
+
+\section{Configuração do Federated Learning}
+O treinamento federado segue ciclos (rodadas) organizados da seguinte forma:
+
+\begin{enumerate}
+    \item Inicialização do modelo global.
+    \item Distribuição para todos os clientes.
+    \item Cada cliente executa $E$ épocas de treinamento local.
+    \item Envio dos pesos locais ao servidor.
+    \item Agregação com FedAvg.
+    \item Atualização do modelo global.
+\end{enumerate}
+
+\subsection{Parâmetros utilizados}
+\begin{itemize}
+    \item número de clientes simulados: 3 a 10;
+    \item número de rodadas federadas: 20 a 50;
+    \item tamanho do batch: 64;
+    \item taxa de aprendizado: 0.001.
+\end{itemize}
+
+\section{Detecção de Anomalias}
+A detecção é realizada localmente, utilizando o erro de reconstrução do VAE. Para uma entrada $x$:
+
+\[
+\text{Anomalia}(x) = ||x - \hat{x}||
+\]
+
+\subsection{Threshold}
+O limiar é definido com base em:
+\begin{itemize}
+    \item média + 3 desvios padrão dos erros de reconstrução;
+    \item ou curva ROC para definição de ponto ótimo.
+\end{itemize}
+
+\section{Métricas de Avaliação}
+Para avaliar o desempenho do sistema foram utilizadas:
+
+\begin{itemize}
+    \item \textbf{AUC-ROC};
+    \item \textbf{Precisão};
+    \item \textbf{Recall};
+    \item \textbf{F1-Score};
+    \item \textbf{Erro de reconstrução médio}.
+\end{itemize}
+
+Além disso, compara-se:
+\begin{itemize}
+    \item modelo treinado centralmente (baseline);
+    \item modelo federado;
+    \item impacto de diferentes números de clientes.
+\end{itemize}
+
+\section{Validação Experimental}
+Os experimentos consistem em:
+
+\begin{enumerate}
+    \item Treinar o modelo centralizado.
+    \item Treinar o modelo com FL.
+    \item Comparar métricas.
+    \item Medir impacto da heterogeneidade dos dados.
+    \item Avaliar sensibilidade ao ruído.
+\end{enumerate}
+
+Esses passos permitem verificar se o aprendizado federado com IA generativa é eficaz na detecção de anomalias em cenários realistas de rede.

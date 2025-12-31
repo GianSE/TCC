@@ -1,0 +1,248 @@
+% -------------------------------------------------------
+% CAPÍTULO 2 — FUNDAMENTAÇÃO TEÓRICA
+% -------------------------------------------------------
+\chapter{Fundamentação Teórica}
+
+Este capítulo apresenta os conceitos fundamentais necessários para compreender o desenvolvimento deste trabalho. Serão descritos aspectos relacionados à segurança em redes, sistemas de detecção de anomalias, modelos de Inteligência Artificial Generativa e a técnica de \textit{Federated Learning}. Também serão apresentados os principais trabalhos relacionados ao tema.
+
+% -------------------------------------------------------
+% 2.1 REDES DE COMPUTADORES E TRÁFEGO DE REDE
+% -------------------------------------------------------
+\section{Redes de Computadores e Tráfego de Rede}
+
+Redes de computadores consistem em sistemas interconectados que permitem a comunicação e o compartilhamento de recursos entre dispositivos. O tráfego de rede é composto por pacotes que carregam informações estruturadas de acordo com protocolos, como TCP, UDP e HTTP, permitindo a transmissão de dados entre diferentes hosts.
+
+Com o aumento da complexidade e da largura de banda, a análise de tráfego tornou-se essencial para fins de:
+\begin{itemize}
+    \item monitoramento;
+    \item detecção de falhas;
+    \item identificação de comportamentos suspeitos;
+    \item prevenção contra ataques.
+\end{itemize}
+
+A natureza dinâmica das redes torna a detecção automática de anomalias um desafio relevante.
+
+% -------------------------------------------------------
+% 2.2 SISTEMAS DE DETECÇÃO DE INTRUSÃO (IDS)
+% -------------------------------------------------------
+\section{Sistemas de Detecção de Intrusão (IDS)}
+
+Um Sistema de Detecção de Intrusão (IDS) é uma ferramenta utilizada para monitorar atividades em uma rede ou host, identificando comportamentos nocivos ou inesperados. IDS podem ser divididos em duas categorias principais:
+
+\begin{itemize}
+    \item \textbf{Baseados em Assinaturas}: detectam ataques conhecidos por meio de padrões previamente catalogados.
+    \item \textbf{Baseados em Anomalias}: identificam divergências em relação ao comportamento normal da rede.
+\end{itemize}
+
+Métodos baseados em assinaturas apresentam alta precisão para ataques conhecidos, mas são incapazes de detectar ameaças inéditas. Já abordagens baseadas em anomalias conseguem identificar comportamentos novos, porém dependem de modelos capazes de aprender padrões complexos de tráfego.
+
+% -------------------------------------------------------
+% 2.3 DETECÇÃO DE ANOMALIAS
+% -------------------------------------------------------
+\section{Detecção de Anomalias}
+
+Detecção de anomalias é o processo de identificar observações que divergiam significativamente do comportamento esperado. Em tráfego de rede, anomalias podem representar:
+
+\begin{itemize}
+    \item ataques de negação de serviço (DDoS);
+    \item escaneamento de portas;
+    \item tentativas de intrusão;
+    \item comportamentos maliciosos internos;
+    \item falhas operacionais.
+\end{itemize}
+
+Modelos tradicionais incluem:
+\begin{itemize}
+    \item SVM;
+    \item Árvores de decisão;
+    \item Redes neurais simples;
+    \item Autoencoders (AE).
+\end{itemize}
+
+Entretanto, tais técnicas muitas vezes falham em capturar distribuições complexas e variáveis temporais do tráfego. Modelos generativos surgem como alternativa para aprender tais padrões de forma mais rica.
+
+% -------------------------------------------------------
+% 2.4 INTELIGÊNCIA ARTIFICIAL GENERATIVA
+% -------------------------------------------------------
+\section{Inteligência Artificial Generativa}
+
+IA Generativa refere-se a modelos capazes de aprender a distribuição dos dados e gerar novas amostras semelhantes às originais. Essa capacidade permite que tais modelos aprendam o “comportamento normal” de um sistema, tornando-os ferramentas eficazes para detecção de anomalias.
+
+Modelos generativos populares incluem:
+
+\subsection{Variational Autoencoder (VAE)}
+
+O VAE é composto por duas redes:
+\begin{itemize}
+    \item um \textit{encoder}, que projeta os dados para um espaço latente;
+    \item um \textit{decoder}, que reconstrói os dados originais a partir desse espaço.
+\end{itemize}
+
+O VAE aprende a distribuição probabilística dos dados, permitindo reconstruções detalhadas. Anomalias tendem a apresentar alto erro de reconstrução.
+
+\subsection{Generative Adversarial Network (GAN)}
+
+GANs consistem em dois componentes:
+\begin{itemize}
+    \item um \textit{gerador}, responsável por criar amostras sintéticas;
+    \item um \textit{discriminador}, responsável por diferenciar amostras reais das geradas.
+\end{itemize}
+
+O treinamento adversarial ajuda o modelo a aprender distribuições complexas. GANs são amplamente usadas para geração de dados e detecção de anomalias via reconstrução.
+
+\subsection{Modelos Diffusion}
+
+Modelos de difusão aprender a geração de dados por meio de um processo progressivo de adição e remoção de ruído. São hoje um dos principais paradigmas para IA generativa, devido à alta qualidade de reconstrução.
+
+Esses modelos são úteis na detecção de anomalias, pois aprendem a reconstruir padrões normais com alta precisão.
+
+% -------------------------------------------------------
+% 2.5 FEDERATED LEARNING
+% -------------------------------------------------------
+\section{Federated Learning}
+
+\textit{Federated Learning} (FL) é uma técnica de aprendizado distribuído em que múltiplos clientes treinam modelos localmente, enviando apenas atualizações de parâmetros para um servidor central. Os dados permanecem armazenados localmente, garantindo privacidade.
+
+O processo básico envolve:
+
+\begin{enumerate}
+    \item distribuição do modelo inicial aos clientes;
+    \item treinamento local em cada nó;
+    \item envio dos parâmetros atualizados ao servidor;
+    \item agregação das atualizações (por exemplo, via FedAvg);
+    \item redistribuição do modelo aos clientes.
+\end{enumerate}
+
+FL é altamente relevante para ambientes com restrições de privacidade, como:
+\begin{itemize}
+    \item redes corporativas;
+    \item ambientes hospitalares;
+    \item sistemas multicamadas;
+    \item dispositivos IoT.
+\end{itemize}
+
+% -------------------------------------------------------
+% 2.6 TRABALHOS RELACIONADOS
+% -------------------------------------------------------
+\section{Trabalhos Relacionados}
+
+Diversos estudos têm explorado a integração entre detecção de anomalias, IA generativa e aprendizado distribuído.
+
+Trabalhos baseados em GAN e VAE demonstram alta eficácia na reconstrução de padrões normais de tráfego, enquanto pesquisas em \textit{Federated Learning} mostram a possibilidade de treinar modelos colaborativos sem comprometer a privacidade. Entretanto, a combinação direta entre modelos generativos e FL ainda é pouco explorada, representando uma oportunidade relevante de pesquisa.
+
+Entre os temas frequentemente estudados estão:
+\begin{itemize}
+    \item autoencoders federados para IDS;
+    \item VAE federado para privacidade;
+    \item GANs aplicadas à detecção de intrusão;
+    \item FL para redes IoT e ambientes distribuídos.
+\end{itemize}
+
+A proposta deste trabalho posiciona-se nessa interseção, buscando avaliar empiricamente a viabilidade de modelos generativos treinados federadamente para detecção de anomalias.
+
+\chapter{Fundamentação Teórica}
+
+Este capítulo apresenta os conceitos fundamentais que sustentam o desenvolvimento deste trabalho, incluindo os princípios de \textit{Federated Learning}, modelos de IA generativa, técnicas de detecção de anomalias em redes e métodos de agregação distribuída. A compreensão desses tópicos é essencial para contextualizar e justificar a metodologia adotada.
+
+\section{Redes de Computadores e Tráfego de Rede}
+A análise de tráfego de rede é um componente essencial em sistemas de monitoramento e segurança. Cada comunicação realizada entre dispositivos gera um conjunto de características, como portas utilizadas, protocolos, tamanho do pacote, tempo de chegada, dentre outros.
+
+Ataques a redes geralmente se manifestam como padrões anômalos nesses fluxos, o que motiva abordagens baseadas em aprendizado de máquina. Entre os ataques mais comuns, destacam-se:
+\begin{itemize}
+    \item \textbf{Port Scanning}
+    \item \textbf{DDoS} (Distributed Denial of Service)
+    \item \textbf{Brute Force}
+    \item \textbf{Botnets e C\&C}
+\end{itemize}
+
+O desafio principal é que o tráfego de rede é altamente não estacionário, e padrões mudam conforme usuários, horários e aplicações. Assim, técnicas clássicas de detecção podem tornar-se insuficientes.
+
+\section{Aprendizado Federado (Federated Learning)}
+O \textit{Federated Learning} (FL), proposto inicialmente pelo Google, é um paradigma de aprendizado distribuído no qual múltiplos clientes treinam localmente seus modelos e enviam apenas atualizações (pesos ou gradientes) para um servidor central.
+
+\subsection{Características do FL}
+\begin{itemize}
+    \item \textbf{Privacidade Preservada}: dados nunca deixam o dispositivo.
+    \item \textbf{Eficiência de Banda}: transmite apenas pesos do modelo.
+    \item \textbf{Heterogeneidade}: cada cliente possui dados diferentes (\textit{non-IID}).
+    \item \textbf{Treinamento Colaborativo}: o modelo global melhora com contribuições locais.
+\end{itemize}
+
+\subsection{FedAvg}
+O algoritmo mais utilizado em FL é o \textit{Federated Averaging} (FedAvg), que combina modelos locais usando a média ponderada:
+
+\[
+w_{global} = \sum_{i=1}^{K} \frac{n_i}{N} w_i
+\]
+
+onde:
+\begin{itemize}
+    \item $w_i$ = pesos do modelo do cliente $i$
+    \item $n_i$ = número de amostras do cliente $i$
+    \item $N = \sum_{i=1}^{K} n_i$
+\end{itemize}
+
+Essa abordagem mantém o modelo global atualizado enquanto reduz drasticamente o custo de comunicação.
+
+\section{Inteligência Artificial Generativa}
+Modelos generativos aprendem a distribuição dos dados e são capazes de gerar novos exemplos similares ao conjunto de treinamento. Eles também podem ser utilizados para detectar anomalias ao tentar reconstruir entradas desconhecidas.
+
+\subsection{Autoencoders Variacionais (VAE)}
+O VAE é um modelo generativo formado por duas partes:
+\begin{itemize}
+    \item \textbf{Encoder}: mapeia uma entrada para um espaço latente.
+    \item \textbf{Decoder}: reconstrói a entrada original.
+\end{itemize}
+
+A função de perda é composta por dois termos:
+\[
+\mathcal{L} = \mathbb{E}[\text{erro de reconstrução}] + D_{KL}(q(z|x) || p(z))
+\]
+
+\subsection{Redes Generativas Adversariais (GANs)}
+GANs consistem em um jogo entre dois modelos:
+\begin{itemize}
+    \item \textbf{Gerador}: tenta criar dados falsos convincentes.
+    \item \textbf{Discriminador}: tenta distinguir real de falso.
+\end{itemize}
+
+Essa competição faz o gerador aprender a distribuição dos dados.
+
+\subsection{Modelos de Difusão}
+Modelos de difusão aprendem removendo ruído progressivamente de dados degradados. Embora muito utilizados em imagens, também podem ser adaptados para dados tabulares e séries temporais.
+
+\section{Detecção de Anomalias Usando IA Generativa}
+Modelos generativos aprendem o comportamento normal da rede. Assim, quando recebem um exemplo fora do padrão, a reconstrução tende a ser ruim.
+
+\subsection{Erro de Reconstrução}
+Uma métrica típica é:
+\[
+\text{Anomalia}(x) = ||x - \hat{x}||
+\]
+onde $\hat{x}$ é a reconstrução do modelo. Valores altos → comportamento suspeito.
+
+\subsection{Aplicações em Tráfego de Rede}
+\begin{itemize}
+    \item detectar ataques antes de saturarem o sistema;
+    \item identificar dispositivos infectados;
+    \item detectar comportamento anormal de aplicações.
+\end{itemize}
+
+\section{Federated Learning para Detecção de Anomalias}
+A combinação de FL com modelos generativos permite usar os benefícios de ambos:
+\begin{itemize}
+    \item aprendizagem colaborativa em vários segmentos da rede;
+    \item privacidade dos dados sensíveis;
+    \item modelos mais robustos devido à diversidade dos clientes;
+    \item melhor generalização e redução de falsos positivos.
+\end{itemize}
+
+\section{Trabalhos Relacionados}
+Estudos recentes demonstram a eficácia dessa abordagem:
+\begin{itemize}
+    \item uso de VAE federados para detecção distribuída;
+    \item GANs federadas para modelagem de comportamento normal;
+    \item FL aplicado a IDS (Intrusion Detection Systems).
+\end{itemize}
+
+A lacuna que este trabalho busca preencher está na integração direta entre modelos generativos e FL especificamente para tráfego de rede real em ambientes distribuídos.

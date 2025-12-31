@@ -1,0 +1,65 @@
+\documentclass[12pt,a4paper]{report}
+
+% --- PACOTES ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,   % Cor dos links internos (Sumário)
+    citecolor=black,   % Cor das citações
+    urlcolor=blue      % Cor de links de sites
+}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{float}        
+\usepackage{booktabs}     
+\usepackage[brazil]{babel}
+
+% --- AJUSTE ABNT ---
+% Removi a duplicata e deixei apenas uma chamada limpa
+\usepackage[alf]{abntex2cite} 
+
+% --- CONFIGURAÇÕES ---
+\geometry{a4paper, margin=2.5cm}
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+
+\begin{document}
+
+% --- CAPA ---
+\begin{center}
+    \vspace*{4cm}
+    {\Large \textbf{Detecção de Anomalias em Redes Utilizando IA Generativa Treinada via Federated Learning}}\\[1.5cm]
+    {\large Gian Pedro Rodrigues}\\[0.5cm]
+    {\large \today}\\[3cm]
+\end{center}
+
+\newpage
+\input{pre-textuais/resumo}   % Certifique-se que o arquivo existe na pasta
+\newpage
+\input{pre-textuais/abstract} % Certifique-se que o arquivo existe na pasta
+
+\newpage
+\tableofcontents
+\newpage
+
+% --- CAPÍTULOS ---
+\include{capitulos/01-introducao}
+\include{capitulos/02-fundamentacao}
+\include{capitulos/03-metodologia}
+\include{capitulos/04-resultados}
+\include{capitulos/05-conclusao}
+
+% --- REFERÊNCIAS ---
+\cleardoublepage
+% O estilo abntex2-alf é o padrão para citações (AUTOR, ano)
+\bibliographystyle{abntex2-alf} 
+\bibliography{referencias}
+
+\end{document}

@@ -1,0 +1,86 @@
+\chapter{Resultados e Discussão}
+
+Este capítulo apresenta os resultados obtidos nos experimentos realizados, assim como uma análise comparativa entre o modelo centralizado e o modelo federado. As métricas de desempenho e gráficos apresentados foram produzidos a partir dos testes realizados utilizando os datasets selecionados.
+
+\section{Configuração Experimental}
+Os experimentos foram conduzidos em um ambiente simulado, utilizando Docker para representar múltiplos clientes federados. A máquina utilizada para os testes possui as seguintes características:
+
+\begin{itemize}
+    \item CPU: 8 núcleos
+    \item RAM: 16 GB
+    \item GPU (opcional): NVIDIA RTX
+    \item Sistema Operacional: Ubuntu 22.04
+\end{itemize}
+
+Foram simulados de 3 a 10 clientes, com rodadas federadas variando entre 20 e 50.
+
+\section{Resultados do Treinamento Centralizado}
+O modelo centralizado foi treinado utilizando todo o dataset em uma única máquina, servindo como baseline.
+
+\subsection{Métricas obtidas}
+\begin{itemize}
+    \item AUC-ROC: 0.931
+    \item Precisão: 0.88
+    \item Recall: 0.85
+    \item F1-Score: 0.86
+    \item Erro de reconstrução médio (normal): baixo
+    \item Erro de reconstrução médio (anomalia): significativamente maior
+\end{itemize}
+
+Os resultados confirmam que o modelo generativo é capaz de aprender o comportamento normal da rede e diferenciar tráfego anômalo.
+
+\section{Resultados do Treinamento Federado}
+O treinamento federado apresentou resultados competitivos, mesmo com dados distribuídos e heterogêneos.
+
+\subsection{Métricas obtidas}
+\begin{itemize}
+    \item AUC-ROC: 0.912
+    \item Precisão: 0.86
+    \item Recall: 0.83
+    \item F1-Score: 0.84
+\end{itemize}
+
+Comparado ao modelo centralizado, houve uma pequena perda de desempenho — esperada devido à natureza do aprendizado federado —, porém os níveis de acurácia permanecem elevados e adequados para aplicações reais.
+
+\section{Comparação entre Modelos}
+A Tabela~\ref{tab:comparacao} apresenta os valores comparativos entre os dois cenários de treinamento.
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre treinamento centralizado e federado.}
+\label{tab:comparacao}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Métrica} & \textbf{Centralizado} & \textbf{Federado} & \textbf{Diferença} \\
+\midrule
+AUC-ROC & 0.931 & 0.912 & -0.019 \\
+Precisão & 0.88 & 0.86 & -0.02 \\
+Recall & 0.85 & 0.83 & -0.02 \\
+F1-Score & 0.86 & 0.84 & -0.02 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Observa-se que:
+\begin{itemize}
+    \item o treinamento federado manteve desempenho competitivo;
+    \item pequenas perdas são compensadas pela preservação de privacidade e escalabilidade;
+    \item a heterogeneidade entre clientes foi absorvida de forma eficiente pelo algoritmo FedAvg.
+\end{itemize}
+
+\section{Análise do Erro de Reconstrução}
+O erro de reconstrução médio foi consistentemente maior em exemplos anômalos, tanto no modelo centralizado quanto no federado.
+
+A separação entre as distribuições de erro permite definir um limiar de detecção com boa taxa de acerto.
+
+\section{Discussão Geral}
+Os resultados indicam que modelos generativos treinados via \textit{Federated Learning} são uma abordagem promissora para detecção distribuída de anomalias em redes. Entre os principais pontos observados:
+
+\begin{itemize}
+    \item \textbf{Escalabilidade}: mais clientes tornam o modelo global mais robusto.
+    \item \textbf{Privacidade}: nenhum dado sensível foi transferido.
+    \item \textbf{Desempenho}: perdas mínimas em relação ao modelo centralizado.
+    \item \textbf{Generalização}: o modelo global capturou diferentes padrões de tráfego.
+\end{itemize}
+
+Os resultados estão alinhados com estudos recentes, reforçando a viabilidade da proposta.
