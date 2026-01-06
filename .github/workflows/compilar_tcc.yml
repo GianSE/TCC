@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Ajuste para 'master' se for o caso da sua branch principal
+      - master
 
 jobs:
   build_latex:
