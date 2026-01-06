@@ -1,0 +1,26 @@
+name: Compilação Automática do TCC
+
+on:
+  push:
+    branches:
+      - main  # Ajuste para 'master' se for o caso da sua branch principal
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Compilar LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          # O latexmk resolve automaticamente as referências do 'referencias.bib'
+          args: "-pdf -latexmk -interaction=nonstopmode"
+
+      - name: Upload do PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: TCC_Gian_Rodrigues
+          path: main.pdf
